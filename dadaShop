@@ -1,0 +1,2122 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DadaShop</title>
+
+<style>
+:root{
+  --primary:#6c4df6;
+  --primary2:#8c6cff;
+  --dark:#17151f;
+  --text:#22202a;
+  --muted:#77727f;
+  --bg:#f7f7fb;
+  --card:#ffffff;
+  --border:#eceaf1;
+  --success:#16a36a;
+  --danger:#e5484d;
+  --shadow:0 12px 35px rgba(31,25,55,.08);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+  border:0;
+}
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav{
+  max-width:1250px;
+  margin:auto;
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:12px 20px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:25px;
+  font-weight:900;
+  color:var(--dark);
+  white-space:nowrap;
+}
+
+.logo-icon{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  color:white;
+  background:linear-gradient(135deg,var(--primary),#a276ff);
+  box-shadow:0 8px 20px rgba(108,77,246,.3);
+}
+
+.search{
+  flex:1;
+  position:relative;
+}
+
+.search input{
+  width:100%;
+  border:1px solid var(--border);
+  background:#f7f6fa;
+  border-radius:15px;
+  padding:13px 18px 13px 44px;
+  outline:none;
+  transition:.2s;
+}
+
+.search input:focus{
+  border-color:var(--primary);
+  background:white;
+  box-shadow:0 0 0 4px rgba(108,77,246,.08);
+}
+
+.search-icon{
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.icon-btn{
+  width:43px;
+  height:43px;
+  border-radius:13px;
+  background:#f3f1f8;
+  color:var(--dark);
+  position:relative;
+}
+
+.icon-btn:hover{
+  background:#e9e5f5;
+}
+
+.badge{
+  position:absolute;
+  right:-3px;
+  top:-4px;
+  min-width:19px;
+  height:19px;
+  padding:0 5px;
+  border-radius:20px;
+  background:var(--primary);
+  color:white;
+  font-size:11px;
+  display:grid;
+  place-items:center;
+  font-weight:bold;
+}
+
+.btn{
+  padding:12px 18px;
+  border-radius:13px;
+  font-weight:800;
+  transition:.2s;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:white;
+  box-shadow:0 8px 18px rgba(108,77,246,.22);
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+}
+
+.btn-light{
+  background:#f1eff6;
+  color:var(--dark);
+}
+
+.btn-danger{
+  background:#ffe9ea;
+  color:var(--danger);
+}
+
+.hero{
+  max-width:1250px;
+  margin:28px auto;
+  padding:0 20px;
+}
+
+.hero-box{
+  min-height:330px;
+  border-radius:30px;
+  padding:50px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(255,255,255,.24),transparent 28%),
+    linear-gradient(135deg,#33237e,#704df0 55%,#a176ff);
+  color:white;
+  box-shadow:var(--shadow);
+}
+
+.hero-box:after{
+  content:"";
+  position:absolute;
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  right:-80px;
+  bottom:-130px;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:650px;
+}
+
+.hero h1{
+  font-size:48px;
+  line-height:1.05;
+  margin-bottom:18px;
+}
+
+.hero p{
+  font-size:18px;
+  line-height:1.6;
+  opacity:.9;
+  margin-bottom:26px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.hero .btn-light{
+  background:white;
+  color:#392884;
+}
+
+.categories{
+  max-width:1250px;
+  margin:0 auto 25px;
+  padding:0 20px;
+}
+
+.category-row{
+  display:flex;
+  gap:10px;
+  overflow:auto;
+  padding-bottom:5px;
+}
+
+.category{
+  flex:none;
+  padding:11px 17px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:30px;
+  font-weight:700;
+  color:#575260;
+}
+
+.category.active,
+.category:hover{
+  color:white;
+  background:var(--primary);
+  border-color:var(--primary);
+}
+
+.container{
+  max-width:1250px;
+  margin:auto;
+  padding:0 20px 60px;
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin:28px 0 18px;
+}
+
+.section-head h2{
+  font-size:27px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.product{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:21px;
+  overflow:hidden;
+  box-shadow:0 7px 25px rgba(20,15,40,.045);
+  transition:.25s;
+}
+
+.product:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow);
+}
+
+.product-image{
+  height:255px;
+  position:relative;
+  background:#eee;
+  overflow:hidden;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.favorite{
+  position:absolute;
+  right:12px;
+  top:12px;
+  width:39px;
+  height:39px;
+  border-radius:50%;
+  background:rgba(255,255,255,.94);
+  font-size:19px;
+}
+
+.favorite.active{
+  color:#e54870;
+}
+
+.product-info{
+  padding:16px;
+}
+
+.product-title{
+  font-weight:800;
+  font-size:16px;
+  margin-bottom:6px;
+}
+
+.product-meta{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:11px;
+}
+
+.product-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.price{
+  font-size:20px;
+  font-weight:900;
+}
+
+.cart-small{
+  padding:9px 12px;
+  border-radius:11px;
+  background:#f0edff;
+  color:var(--primary);
+  font-weight:800;
+}
+
+.empty{
+  text-align:center;
+  padding:50px 20px;
+  background:white;
+  border:1px dashed #dcd8e5;
+  border-radius:20px;
+  color:var(--muted);
+}
+
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(14,12,21,.55);
+  backdrop-filter:blur(6px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+  padding:18px;
+}
+
+.modal-bg.show{
+  display:flex;
+}
+
+.modal{
+  width:min(560px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:white;
+  border-radius:25px;
+  box-shadow:0 25px 80px rgba(0,0,0,.25);
+  padding:25px;
+  animation:modalIn .2s ease;
+}
+
+@keyframes modalIn{
+  from{transform:translateY(15px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:22px;
+}
+
+.modal-head h2{
+  font-size:24px;
+}
+
+.close{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#f2f0f5;
+  font-size:20px;
+}
+
+.form-group{
+  margin-bottom:15px;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:7px;
+  font-weight:750;
+  font-size:14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:13px;
+  outline:none;
+  background:#faf9fc;
+}
+
+.form-group textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:var(--primary);
+  background:white;
+}
+
+.form-error{
+  display:none;
+  background:#fff0f1;
+  color:#c9353d;
+  border:1px solid #ffd3d6;
+  padding:12px;
+  border-radius:12px;
+  margin-bottom:14px;
+  font-size:14px;
+}
+
+.form-error.show{
+  display:block;
+}
+
+.photo-box{
+  border:2px dashed #dcd7e9;
+  border-radius:15px;
+  padding:20px;
+  text-align:center;
+  color:var(--muted);
+  margin-bottom:15px;
+}
+
+.photo-preview{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  margin-top:12px;
+}
+
+.photo-preview div{
+  position:relative;
+}
+
+.photo-preview img{
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.remove-photo{
+  position:absolute;
+  right:4px;
+  top:4px;
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:#fff;
+  color:#e5484d;
+  font-weight:bold;
+}
+
+.cart-item{
+  display:flex;
+  gap:13px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.cart-item img{
+  width:75px;
+  height:75px;
+  border-radius:12px;
+  object-fit:cover;
+}
+
+.cart-item-info{
+  flex:1;
+}
+
+.cart-item-title{
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.cart-item-price{
+  font-weight:900;
+}
+
+.cart-total{
+  display:flex;
+  justify-content:space-between;
+  font-size:21px;
+  font-weight:900;
+  padding:20px 0;
+}
+
+.payment-option{
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:16px;
+  margin-bottom:10px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.payment-option:hover{
+  border-color:var(--primary);
+  background:#faf8ff;
+}
+
+.account-card{
+  text-align:center;
+  padding:10px;
+}
+
+.avatar{
+  width:75px;
+  height:75px;
+  margin:0 auto 12px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--primary),#a176ff);
+  color:white;
+  font-size:30px;
+  font-weight:900;
+}
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#17151f;
+  color:white;
+  padding:14px 18px;
+  border-radius:13px;
+  box-shadow:var(--shadow);
+  transform:translateY(100px);
+  opacity:0;
+  transition:.3s;
+  z-index:200;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.footer{
+  background:#17151f;
+  color:#aaa5b2;
+  padding:35px 20px;
+  text-align:center;
+}
+
+.footer strong{
+  color:white;
+}
+
+@media(max-width:1000px){
+  .products{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .hero h1{
+    font-size:40px;
+  }
+}
+
+@media(max-width:750px){
+  .nav{
+    flex-wrap:wrap;
+  }
+
+  .search{
+    order:3;
+    flex-basis:100%;
+  }
+
+  .logo{
+    font-size:21px;
+  }
+
+  .nav-actions{
+    margin-left:auto;
+  }
+
+  .nav-actions .sell-btn{
+    display:none;
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .product-image{
+    height:210px;
+  }
+
+  .hero-box{
+    padding:35px 25px;
+  }
+
+  .hero h1{
+    font-size:35px;
+  }
+}
+
+@media(max-width:480px){
+  .products{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .product-image{
+    height:180px;
+  }
+
+  .product-info{
+    padding:12px;
+  }
+
+  .price{
+    font-size:17px;
+  }
+
+  .cart-small{
+    font-size:12px;
+    padding:8px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <nav class="nav">
+
+    <div class="logo">
+      <div class="logo-icon">D</div>
+      DadaShop
+    </div>
+
+    <div class="search">
+      <span class="search-icon">🔎</span>
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Rechercher un article..."
+        oninput="renderProducts()"
+      >
+    </div>
+
+    <div class="nav-actions">
+
+      <button class="icon-btn" onclick="cycleLanguage()" title="Langue">
+        🌐
+      </button>
+
+      <button class="icon-btn" onclick="openFavorites()" title="Favoris">
+        ♡
+        <span class="badge" id="favBadge">0</span>
+      </button>
+
+      <button class="icon-btn" onclick="openCart()" title="Panier">
+        🛒
+        <span class="badge" id="cartBadge">0</span>
+      </button>
+
+      <button class="btn btn-primary sell-btn" onclick="openSell()">
+        + Vendre
+      </button>
+
+      <button class="icon-btn" onclick="openAccount()" title="Compte">
+        👤
+      </button>
+
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-box">
+
+    <div class="hero-content">
+      <h1 id="heroTitle">Achète. Vends. Recommence.</h1>
+
+      <p id="heroText">
+        Découvre des articles que tu vas aimer et vends facilement
+        ceux dont tu n'as plus besoin.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-light" onclick="scrollToProducts()">
+          Découvrir les articles
+        </button>
+
+        <button class="btn btn-primary" onclick="openSell()">
+          Vendre un article
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="categories">
+
+  <div class="category-row" id="categoryRow">
+
+    <button class="category active" onclick="setCategory('all',this)">
+      Tout
+    </button>
+
+    <button class="category" onclick="setCategory('Mode',this)">
+      👕 Mode
+    </button>
+
+    <button class="category" onclick="setCategory('Chaussures',this)">
+      👟 Chaussures
+    </button>
+
+    <button class="category" onclick="setCategory('Accessoires',this)">
+      👜 Accessoires
+    </button>
+
+    <button class="category" onclick="setCategory('Maison',this)">
+      🏠 Maison
+    </button>
+
+    <button class="category" onclick="setCategory('Électronique',this)">
+      💻 Électronique
+    </button>
+
+  </div>
+
+</section>
+
+<main class="container">
+
+  <div class="section-head">
+    <h2 id="latestTitle">Dernières annonces</h2>
+    <span id="resultCount"></span>
+  </div>
+
+  <div id="products" class="products"></div>
+
+</main>
+
+<footer class="footer">
+  <strong>DadaShop</strong>
+  <br><br>
+  Marketplace de démonstration — version locale
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<!-- MODAL -->
+
+<div id="modalBg" class="modal-bg" onclick="closeOutside(event)">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+
+/* =========================
+   DONNÉES
+========================= */
+
+const starterProducts = [
+  {
+    id:1,
+    title:"Veste vintage",
+    price:35,
+    category:"Mode",
+    seller:"Emma",
+    image:"https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80",
+    images:[],
+    reviews:[]
+  },
+
+  {
+    id:2,
+    title:"Sneakers blanches",
+    price:55,
+    category:"Chaussures",
+    seller:"Lucas",
+    image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+    images:[],
+    reviews:[]
+  },
+
+  {
+    id:3,
+    title:"Sac élégant",
+    price:42,
+    category:"Accessoires",
+    seller:"Sarah",
+    image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80",
+    images:[],
+    reviews:[]
+  },
+
+  {
+    id:4,
+    title:"Casque audio",
+    price:70,
+    category:"Électronique",
+    seller:"Alex",
+    image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+    images:[],
+    reviews:[]
+  },
+
+  {
+    id:5,
+    title:"Lampe moderne",
+    price:25,
+    category:"Maison",
+    seller:"Nina",
+    image:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80",
+    images:[],
+    reviews:[]
+  }
+];
+
+let userProducts =
+  JSON.parse(localStorage.getItem("marketplaceProducts") || "[]");
+
+let products = [...starterProducts, ...userProducts];
+
+let accounts =
+  JSON.parse(localStorage.getItem("accounts") || "[]");
+
+let currentUser =
+  JSON.parse(localStorage.getItem("currentUser") || "null");
+
+let cart =
+  JSON.parse(localStorage.getItem("cart") || "[]");
+
+let favorites =
+  JSON.parse(localStorage.getItem("favorites") || "[]");
+
+let selectedPhotos = [];
+
+let currentCategory = "all";
+
+const languages = ["fr","en","es","ru","az"];
+
+let languageIndex =
+  Number(localStorage.getItem("languageIndex") || 0);
+
+
+/* =========================
+   TRADUCTIONS
+========================= */
+
+const translations = {
+
+  fr:{
+    sell:"Vendre",
+    login:"Connexion",
+    logout:"Déconnexion",
+    heroTitle:"Achète. Vends. Recommence.",
+    heroText:"Découvre des articles que tu vas aimer et vends facilement ceux dont tu n'as plus besoin.",
+    latest:"Dernières annonces",
+    all:"Tout",
+    search:"Rechercher un article..."
+  },
+
+  en:{
+    sell:"Sell",
+    login:"Login",
+    logout:"Logout",
+    heroTitle:"Buy. Sell. Repeat.",
+    heroText:"Discover items you love and easily sell the things you no longer need.",
+    latest:"Latest listings",
+    all:"All",
+    search:"Search for an item..."
+  },
+
+  es:{
+    sell:"Vender",
+    login:"Iniciar sesión",
+    logout:"Cerrar sesión",
+    heroTitle:"Compra. Vende. Repite.",
+    heroText:"Descubre artículos que te encantan y vende fácilmente lo que ya no necesitas.",
+    latest:"Últimos anuncios",
+    all:"Todo",
+    search:"Buscar un artículo..."
+  },
+
+  ru:{
+    sell:"Продать",
+    login:"Войти",
+    logout:"Выйти",
+    heroTitle:"Покупай. Продавай. Повторяй.",
+    heroText:"Находи любимые вещи и продавай то, что тебе больше не нужно.",
+    latest:"Последние объявления",
+    all:"Все",
+    search:"Поиск товара..."
+  },
+
+  az:{
+    sell:"Sat",
+    login:"Daxil ol",
+    logout:"Çıxış",
+    heroTitle:"Al. Sat. Yenidən.",
+    heroText:"Sevdiyin məhsulları kəşf et və artıq ehtiyacın olmayan əşyaları asanlıqla sat.",
+    latest:"Son elanlar",
+    all:"Hamısı",
+    search:"Məhsul axtar..."
+  }
+
+};
+
+
+/* =========================
+   INITIALISATION
+========================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  applyLanguage();
+
+  renderProducts();
+
+  updateBadges();
+
+});
+
+
+/* =========================
+   PRODUITS
+========================= */
+
+function renderProducts(){
+
+  const container =
+    document.getElementById("products");
+
+  const search =
+    document.getElementById("searchInput").value
+      .toLowerCase()
+      .trim();
+
+  let filtered = products.filter(product=>{
+
+    const categoryOK =
+      currentCategory === "all" ||
+      product.category === currentCategory;
+
+    const searchOK =
+      product.title.toLowerCase().includes(search) ||
+      product.category.toLowerCase().includes(search);
+
+    return categoryOK && searchOK;
+
+  });
+
+  document.getElementById("resultCount").textContent =
+    filtered.length + " article(s)";
+
+  if(!filtered.length){
+
+    container.innerHTML = `
+      <div class="empty" style="grid-column:1/-1">
+        <div style="font-size:45px;margin-bottom:10px">🔎</div>
+        <h3>Aucun article trouvé</h3>
+        <p>Essaie une autre recherche ou une autre catégorie.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  container.innerHTML = filtered.map(product=>{
+
+    const isFavorite =
+      favorites.includes(product.id);
+
+    return `
+
+      <article class="product">
+
+        <div class="product-image">
+
+          <img
+            src="${escapeHTML(product.image)}"
+            alt="${escapeHTML(product.title)}"
+          >
+
+          <button
+            class="favorite ${isFavorite ? "active":""}"
+            onclick="toggleFavorite(${product.id})"
+          >
+            ${isFavorite ? "♥":"♡"}
+          </button>
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-title">
+            ${escapeHTML(product.title)}
+          </div>
+
+          <div class="product-meta">
+            ${escapeHTML(product.category)}
+            · ${escapeHTML(product.seller)}
+          </div>
+
+          <div class="product-bottom">
+
+            <div class="price">
+              ${Number(product.price).toFixed(2)} €
+            </div>
+
+            <button
+              class="cart-small"
+              onclick="addToCart(${product.id})"
+            >
+              🛒 Ajouter
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    `;
+
+  }).join("");
+
+}
+
+
+/* =========================
+   CATÉGORIES
+========================= */
+
+function setCategory(category,button){
+
+  currentCategory = category;
+
+  document.querySelectorAll(".category")
+    .forEach(x=>x.classList.remove("active"));
+
+  button.classList.add("active");
+
+  renderProducts();
+
+}
+
+
+/* =========================
+   FAVORIS
+========================= */
+
+function toggleFavorite(id){
+
+  if(favorites.includes(id)){
+
+    favorites =
+      favorites.filter(x=>x!==id);
+
+    showToast("Retiré des favoris");
+
+  }else{
+
+    favorites.push(id);
+
+    showToast("Ajouté aux favoris");
+
+  }
+
+  localStorage.setItem(
+    "favorites",
+    JSON.stringify(favorites)
+  );
+
+  updateBadges();
+
+  renderProducts();
+
+}
+
+
+function openFavorites(){
+
+  const favProducts =
+    products.filter(x=>favorites.includes(x.id));
+
+  openModal(`
+
+    <div class="modal-head">
+
+      <h2>❤️ Favoris</h2>
+
+      <button class="close" onclick="closeModal()">×</button>
+
+    </div>
+
+    ${
+      favProducts.length
+      ?
+      favProducts.map(p=>`
+
+        <div class="cart-item">
+
+          <img src="${p.image}">
+
+          <div class="cart-item-info">
+
+            <div class="cart-item-title">
+              ${escapeHTML(p.title)}
+            </div>
+
+            <div class="cart-item-price">
+              ${Number(p.price).toFixed(2)} €
+            </div>
+
+          </div>
+
+        </div>
+
+      `).join("")
+      :
+      `<div class="empty">Tu n'as encore aucun favori.</div>`
+    }
+
+  `);
+
+}
+
+
+/* =========================
+   PANIER
+========================= */
+
+function addToCart(id){
+
+  const product =
+    products.find(x=>x.id===id);
+
+  if(!product) return;
+
+  cart.push(id);
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+  updateBadges();
+
+  showToast("Article ajouté au panier 🛒");
+
+}
+
+
+function openCart(){
+
+  const items =
+    cart.map(id=>products.find(x=>x.id===id))
+        .filter(Boolean);
+
+  const total =
+    items.reduce((sum,item)=>sum+Number(item.price),0);
+
+  openModal(`
+
+    <div class="modal-head">
+
+      <h2>🛒 Panier</h2>
+
+      <button class="close" onclick="closeModal()">×</button>
+
+    </div>
+
+    ${
+      items.length
+      ?
+      `
+
+      ${items.map((item,index)=>`
+
+        <div class="cart-item">
+
+          <img src="${item.image}">
+
+          <div class="cart-item-info">
+
+            <div class="cart-item-title">
+              ${escapeHTML(item.title)}
+            </div>
+
+            <div class="cart-item-price">
+              ${Number(item.price).toFixed(2)} €
+            </div>
+
+          </div>
+
+          <button
+            class="btn btn-danger"
+            onclick="removeFromCart(${index})"
+          >
+            ×
+          </button>
+
+        </div>
+
+      `).join("")}
+
+      <div class="cart-total">
+        <span>Total</span>
+        <span>${total.toFixed(2)} €</span>
+      </div>
+
+      <button
+        class="btn btn-primary"
+        style="width:100%"
+        onclick="openCheckout()"
+      >
+        Continuer vers le paiement
+      </button>
+
+      `
+      :
+      `<div class="empty">Ton panier est vide 🛒</div>`
+    }
+
+  `);
+
+}
+
+
+function removeFromCart(index){
+
+  cart.splice(index,1);
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+  updateBadges();
+
+  openCart();
+
+}
+
+
+function updateBadges(){
+
+  document.getElementById("cartBadge")
+    .textContent = cart.length;
+
+  document.getElementById("favBadge")
+    .textContent = favorites.length;
+
+}
+
+
+/* =========================
+   COMPTE
+========================= */
+
+function openAccount(){
+
+  if(!currentUser){
+
+    openLogin();
+
+    return;
+
+  }
+
+  openModal(`
+
+    <div class="modal-head">
+
+      <h2>👤 Mon compte</h2>
+
+      <button class="close" onclick="closeModal()">×</button>
+
+    </div>
+
+    <div class="account-card">
+
+      <div class="avatar">
+        ${escapeHTML(currentUser.name.charAt(0).toUpperCase())}
+      </div>
+
+      <h2>${escapeHTML(currentUser.name)}</h2>
+
+      <p style="color:var(--muted);margin:7px 0 22px">
+        ${escapeHTML(currentUser.email)}
+      </p>
+
+      <button
+        class="btn btn-danger"
+        style="width:100%"
+        onclick="logout()"
+      >
+        Déconnexion
+      </button>
+
+    </div>
+
+  `);
+
+}
+
+
+function openLogin(){
+
+  openModal(`
+
+    <div class="modal-head">
+
+      <h2>👤 Connexion</h2>
+
+      <button class="close" onclick="closeModal()">×</button>
+
+    </div>
+
+    <div id="loginError" class="form-error"></div>
+
+    <form onsubmit="login(event)">
+
+      <div class="form-group">
+
+        <label>Email</label>
+
+        <input
+          id="loginEmail"
+          type="email"
+          required
+          placeholder="ton@email.com"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Mot de passe</label>
+
+        <input
+          id="loginPassword"
+          type="password"
+          required
+          placeholder="••••••••"
+        >
+
+      </div>
+
+      <button
+        class="btn btn-primary"
+        style="width:100%"
+      >
+        Se connecter
+      </button>
+
+    </form>
+
+    <div style="text-align:center;margin-top:18px;color:var(--muted)">
+      Pas encore de compte ?
+      <button
+        style="background:none;color:var(--primary);font-weight:800"
+        onclick="openRegister()"
+      >
+        Créer un compte
+      </button>
+    </div>
+
+  `);
+
+}
+
+
+function login(event){
+
+  event.preventDefault();
+
+  const email =
+    document.getElementById("loginEmail")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const password =
+    document.getElementById("loginPassword")
+      .value;
+
+  const error =
+    document.getElementById("loginError");
+
+  const account =
+    accounts.find(
+      x=>x.email.toLowerCase()===email
+    );
+
+  if(!account){
+
+    error.classList.add("show");
+
+    error.innerHTML = `
+      Ce compte n'existe pas.<br>
+      <button
+        onclick="openRegister()"
+        style="
+          margin-top:8px;
+          background:none;
+          color:#b42e38;
+          font-weight:900;
+          text-decoration:underline;
+        "
+      >
+        Créer un compte
+      </button>
+    `;
+
+    return;
+
+  }
+
+  if(account.password !== password){
+
+    error.classList.add("show");
+
+    error.textContent =
+      "Mot de passe incorrect.";
+
+    return;
+
+  }
+
+  currentUser = {
+    id:account.id,
+    name:account.name,
+    email:account.email
+  };
+
+  localStorage.setItem(
+    "currentUser",
+    JSON.stringify(currentUser)
+  );
+
+  closeModal();
+
+  showToast("Connexion réussie 👋");
+
+}
+
+
+function openRegister(){
+
+  openModal(`
+
+    <div class="modal-head">
+
+      <h2>✨ Créer un compte</h2>
+
+      <button class="close" onclick="closeModal()">×</button>
+
+    </div>
+
+    <form onsubmit="register(event)">
+
+      <div class="form-group">
+
+        <label>Nom</label>
+
+        <input
+          id="registerName"
+          required
+          placeholder="Ton nom"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Email</label>
+
+        <input
+          id="registerEmail"
+          type="email"
+          required
+          placeholder="ton@email.com"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Mot de passe</label>
+
+        <input
+          id="registerPassword"
+          type="password"
+          minlength="6"
+          required
+          placeholder="Minimum 6 caractères"
+        >
+
+      </div>
+
+      <button
+        class="btn btn-primary"
+        style="width:100%"
+      >
+        Créer mon compte
+      </button>
+
+    </form>
+
+  `);
+
+}
+
+
+function register(event){
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("registerName").value.trim();
+
+  const email =
+    document.getElementById("registerEmail")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const password =
+    document.getElementById("registerPassword").value;
+
+  if(accounts.some(x=>x.email.toLowerCase()===email)){
+
+    showToast("Un compte existe déjà avec cet email.");
+
+    return;
+
+  }
+
+  const account = {
+
+    id:Date.now(),
+
+    name,
+
+    email,
+
+    password
+
+  };
+
+  accounts.push(account);
+
+  localStorage.setItem(
+    "accounts",
+    JSON.stringify(accounts)
+  );
+
+  currentUser = {
+    id:account.id,
+    name:account.name,
+    email:account.email
+  };
+
+  localStorage.setItem(
+    "currentUser",
+    JSON.stringify(currentUser)
+  );
+
+  closeModal();
+
+  showToast("Compte créé avec succès 🎉");
+
+}
+
+
+function logout(){
+
+  currentUser = null;
+
+  localStorage.removeItem("currentUser");
+
+  closeModal();
+
+  showToast("Tu es déconnecté.");
+
+}
+
+
+/* =========================
+   VENDRE
+========================= */
+
+function openSell(){
+
+  if(!currentUser){
+
+    openModal(`
+
+      <div class="modal-head">
+
+        <h2>Vendre sur DadaShop</h2>
+
+        <button class="close" onclick="closeModal()">×</button>
+
+      </div>
+
+      <p style="color:var(--muted);line-height:1.6">
+        Tu dois avoir un compte pour vendre un article.
+      </p>
+
+      <br>
+
+      <button
+        class="btn btn-primary"
+        style="width:100%"
+        onclick="openRegister()"
+      >
+        Créer un compte
+      </button>
+
+      <br><br>
+
+      <button
+        class="btn btn-light"
+        style="width:100%"
+        onclick="openLogin()"
+      >
+        Se connecter
+      </button>
+
+    `);
+
+    return;
+
+  }
+
+  selectedPhotos = [];
+
+  openModal(`
+
+    <div class="modal-head">
+
+      <h2>📦 Vendre un article</h2>
+
+      <button class="close" onclick="closeModal()">×</button>
+
+    </div>
+
+    <form onsubmit="createProduct(event)">
+
+      <div class="form-group">
+
+        <label>Nom de l'article</label>
+
+        <input
+          id="sellTitle"
+          required
+          placeholder="Ex : Veste Nike"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Prix (€)</label>
+
+        <input
+          id="sellPrice"
+          type="number"
+          min="0"
+          step="0.01"
+          required
+          placeholder="25"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Catégorie</label>
+
+        <select id="sellCategory" required>
+
+          <option value="Mode">Mode</option>
+          <option value="Chaussures">Chaussures</option>
+          <option value="Accessoires">Accessoires</option>
+          <option value="Maison">Maison</option>
+          <option value="Électronique">Électronique</option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Description</label>
+
+        <textarea
+          id="sellDescription"
+          placeholder="Décris ton article..."
+        ></textarea>
+
+      </div>
+
+      <div class="photo-box">
+
+        <div style="font-size:35px">📸</div>
+
+        <strong>Ajoute tes photos</strong>
+
+        <p style="margin:6px 0 12px">
+          Choisis directement les photos de ton téléphone.
+        </p>
+
+        <input
+          id="photoInput"
+          type="file"
+          accept="image/*"
+          multiple
+          onchange="handlePhotos(event)"
+        >
+
+        <div
+          id="photoPreview"
+          class="photo-preview"
+        ></div>
+
+      </div>
+
+      <button
+        class="btn btn-primary"
+        style="width:100%"
+      >
+        Publier l'article
+      </button>
+
+    </form>
+
+  `);
+
+}
+
+
+function handlePhotos(event){
+
+  selectedPhotos = [];
+
+  const files =
+    Array.from(event.target.files || []);
+
+  files.forEach(file=>{
+
+    const reader = new FileReader();
+
+    reader.onload = e=>{
+
+      selectedPhotos.push(e.target.result);
+
+      renderPhotoPreview();
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+}
+
+
+function renderPhotoPreview(){
+
+  const preview =
+    document.getElementById("photoPreview");
+
+  if(!preview) return;
+
+  preview.innerHTML =
+    selectedPhotos.map((photo,index)=>`
+
+      <div>
+
+        <img src="${photo}">
+
+        <button
+          type="button"
+          class="remove-photo"
+          onclick="removePhoto(${index})"
+        >
+          ×
+        </button>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+function removePhoto(index){
+
+  selectedPhotos.splice(index,1);
+
+  renderPhotoPreview();
+
+}
+
+
+function createProduct(event){
+
+  event.preventDefault();
+
+  if(!selectedPhotos.length){
+
+    showToast("Ajoute au moins une photo.");
+
+    return;
+
+  }
+
+  const product = {
+
+    id:Date.now(),
+
+    title:
+      document.getElementById("sellTitle").value.trim(),
+
+    price:
+      Number(document.getElementById("sellPrice").value),
+
+    category:
+      document.getElementById("sellCategory").value,
+
+    description:
+      document.getElementById("sellDescription").value.trim(),
+
+    seller:
+      currentUser.name,
+
+    image:
+      selectedPhotos[0],
+
+    images:
+      selectedPhotos,
+
+    reviews:[]
+
+  };
+
+  products.unshift(product);
+
+  userProducts.unshift(product);
+
+  localStorage.setItem(
+    "marketplaceProducts",
+    JSON.stringify(userProducts)
+  );
+
+  closeModal();
+
+  renderProducts();
+
+  showToast("Article publié 🎉");
+
+}
+
+
+/* =========================
+   PAIEMENT
+========================= */
+
+function openCheckout(){
+
+  if(!cart.length){
+
+    showToast("Ton panier est vide.");
+
+    return;
+
+  }
+
+  openModal(`
+
+    <div class="modal-head">
+
+      <h2>💳 Paiement</h2>
+
+      <button class="close" onclick="closeModal()">×</button>
+
+    </div>
+
+    <p style="color:var(--muted);margin-bottom:18px">
+      Choisis ton moyen de paiement.
+    </p>
+
+    <button
+      class="payment-option"
+      style="width:100%;text-align:left"
+      onclick="fakePayment('Carte bancaire')"
+    >
+      💳
+      <div>
+        <strong>Carte bancaire</strong>
+        <br>
+        <small>Visa · Mastercard · Amex</small>
+      </div>
+    </button>
+
+    <button
+      class="payment-option"
+      style="width:100%;text-align:left"
+      onclick="fakePayment('PayPal')"
+    >
+      🅿️
+      <div>
+        <strong>PayPal</strong>
+        <br>
+        <small>Paiement PayPal</small>
+      </div>
+    </button>
+
+    <div
+      style="
+        margin-top:16px;
+        padding:12px;
+        background:#fff8e6;
+        border-radius:12px;
+        color:#80620b;
+        font-size:13px;
+      "
+    >
+      ⚠️ Cette version est une démonstration.
+      Aucun vrai paiement n'est effectué.
+    </div>
+
+  `);
+
+}
+
+
+function fakePayment(method){
+
+  cart = [];
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+  updateBadges();
+
+  closeModal();
+
+  showToast(
+    "Paiement de démonstration avec " +
+    method +
+    " ✅"
+  );
+
+}
+
+
+/* =========================
+   LANGUES
+========================= */
+
+function cycleLanguage(){
+
+  languageIndex =
+    (languageIndex + 1) % languages.length;
+
+  localStorage.setItem(
+    "languageIndex",
+    languageIndex
+  );
+
+  applyLanguage();
+
+}
+
+
+function applyLanguage(){
+
+  const lang =
+    languages[languageIndex];
+
+  const t =
+    translations[lang];
+
+  document.getElementById("heroTitle")
+    .textContent=t.heroTitle;
+
+  document.getElementById("heroText")
+    .textContent=t.heroText;
+
+  document.getElementById("latestTitle")
+    .textContent=t.latest;
+
+  document.getElementById("searchInput")
+    .placeholder=t.search;
+
+  const sellButtons =
+    document.querySelectorAll(".sell-btn");
+
+  sellButtons.forEach(btn=>{
+    btn.textContent="+ " + t.sell;
+  });
+
+}
+
+
+/* =========================
+   MODALES
+========================= */
+
+function openModal(content){
+
+  document.getElementById("modal").innerHTML =
+    content;
+
+  document.getElementById("modalBg")
+    .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+  document.getElementById("modalBg")
+    .classList.remove("show");
+
+}
+
+
+function closeOutside(event){
+
+  if(event.target.id==="modalBg"){
+    closeModal();
+  }
+
+}
+
+
+/* =========================
+   UTILITAIRES
+========================= */
+
+function scrollToProducts(){
+
+  document.querySelector(".container")
+    .scrollIntoView({
+      behavior:"smooth"
+```
